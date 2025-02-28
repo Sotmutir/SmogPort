@@ -106,12 +106,36 @@ session_start();
 
 
     <footer>
-        <img src="img/image.png">
-
-        <div class="footer"></div>
+        <div class="footer-img-container">
+            <img src="img/image.png">
+            <div class="footer-img-cover"></div>
+        </div>
 
         <div class="footer-content">
-            
+            <div class="footer-col">
+                <h2>Nasze media społecznościowe</h2>
+
+                <a href=""><img src="" alt="FB">#GorzowSmogPort</a>
+                <a href=""><img src="" alt="X">#GorzowSmogPort</a>
+                <a href=""><img src="" alt="YT">#GorzowSmogPort</a>
+                <a href=""><img src="" alt="IG">#GorzowSmogPort</a>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-col" style="width: calc(2 * 156px + 15px);">
+                    <p>Masz problem z rezerwacją? Zgłoś go, ale żeby to zrobić musisz się pierw zalogować!</p>
+
+                    <div class="footer-row">
+                        <a href="" class="btn-white btn-vsmall">Zaloguj</a>                        
+                        <a href="" class="btn-blue btn-vsmall">Zarejestruj</a>                        
+                    </div>
+                </div>
+
+                <div class="footer-row footer-logo">
+                    <img src="img/planeWhite.png" alt="">
+                    <strong>Gorzów Smogport</strong>
+                </div>
+            </div>
         </div>
     </footer>
 

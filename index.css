@@ -203,46 +203,123 @@ footer {
 
     background: rgb(36, 36, 36);
 
-    position: absolute;
-    
     margin: 110px 0px 0px 0px;
     padding: 0px;
 
     display: flex;
+    flex-direction: row;
+}
+
+.footer-img-container {
+    height: 100%;
+    width: 35%;
+
+    position: relative;
+
+    display: flex;
+}
+
+.footer-img-cover {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    background: linear-gradient(-90deg, #242424, #24242482, #24242400);
 }
 
 footer img[src="img/image.png"] {
+    width: 100%;
     height: 100%;
-
-    margin: 0px;
-    padding: 0px;
-
-    /* position: absolute;
-    left: 0px;
-    top: 0px; */
-}
-
-.footer {
-    width: calc(100%);
-    height: 100%;
-
-    background: linear-gradient(-90deg, #242424, #242424, #242424, #242424, #242424, #24242400);
 
     position: absolute;
     top: 0px;
     left: 0px;
 }
 
+footer a {
+    color: #fafafa;
+    font-size: 10.3pt;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    font-style: normal;
+
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    margin: 0;
+    padding: 0;
+}
+
+footer a img {
+    width: 35px;
+    height: 30px;
+}
+
+footer h2 {
+    padding: 0;
+    margin-bottom: 10px;
+
+    color: #fafafa;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12pt;
+    font-weight: 500;
+}
+
+footer strong {
+    color: #fafafa;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 5px;
+    font-size: 30pt;
+    font-weight: 500;
+}
+
+footer p {
+    color: #fafafa;
+    font-size: 11.4pt;
+    font-family: "Montserrat", sans-serif;
+}
+
+.footer-logo {
+    margin-top: 35px;
+    gap: 20px;
+}
+
 .footer-content {
-    width: calc(100% - 75px);
+    width: calc(65% - 25px);
     height: 100%;
 
     padding-left: 75px;
+    padding-left: 25px;
 
     display: flex;
+    gap: 25px;
 
     position: relative;
 }
+
+.footer-col {
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-row {
+    height: fit-content;
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+
 
 
 
@@ -302,6 +379,13 @@ footer img[src="img/image.png"] {
 
 .btn-small {
     width: 200px;
+    height: 40px;
+
+    font-size: 14pt;
+}
+
+.btn-vsmall {
+    width: 156px;
     height: 40px;
 
     font-size: 14pt;
