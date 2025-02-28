@@ -15,17 +15,19 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
+    <link rel="stylesheet" href="animations.css">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <section class="front">
+    <section class="front" id="main">
         <header>
             <div class="header-left">
-                <a href="">Strona główna</a>
-                <a href="#about-us">O nas</a>
-                <a href="#footer">Kontakt</a>
-                <a href="loty.php">Loty</a>
-                <a href="gra.php">Gra online</a>
+                <img src="img/planeWhite.svg" id="headerMarker">
+                <a href="#main" id="home">Strona główna</a>
+                <a href="#about-us" id="aboutUs">O nas</a>
+                <a href="#footer" id="contact">Kontakt</a>
+                <a href="loty.php" id="flights">Loty</a>
+                <a href="gra.php" id="game">Gra online</a>
             </div>
 
             <div class="header-right">
@@ -105,7 +107,7 @@ session_start();
     </section>
 
 
-    <footer>
+    <footer id="footer">
         <div class="footer-img-container">
             <img src="img/image.png">
             <div class="footer-img-cover"></div>
@@ -132,7 +134,7 @@ session_start();
                 </div>
 
                 <div class="footer-row footer-logo">
-                    <img src="img/planeWhite.png" alt="">
+                    <img src="img/planeWhite.svg" alt="">
                     <strong>Gorzów Smogport</strong>
                 </div>
             </div>
