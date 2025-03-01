@@ -9,7 +9,7 @@ if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smog port - Logowanie</title>
+    <title>Smog port - Rejestracja</title>
 
     <link rel="stylesheet" href="css/auth.css">
 </head>
@@ -18,7 +18,7 @@ if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
         <form id="form">
             <div class="front">
                 <div class="main-header">
-                    <h1>Logowanie</h1>
+                    <h1>Rejestracja</h1>
     
                     <h2>
                         <img src="img/planeWhite.svg">
@@ -36,10 +36,15 @@ if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
                         <label for="password">Hasło</label>
                         <input type="password" id="password" name="password" required>
                     </div>
+
+                    <div class="form-row">
+                        <label for="password2">Powtórz hasło</label>
+                        <input type="password" id="password2" name="password2" required>
+                    </div>
     
                     <div class="form-row form-buttons">
-                        <button type="submit" id="auth-btn" class="btn-blue">Zaloguj</button>
-                        <a href="register.php">Zarejestruj</a>
+                        <button type="submit" id="auth-btn" class="btn-blue">Zarejestruj</button>
+                        <a href="login.php">Zaloguj</a>
                     </div>
                 </div>
             </div>

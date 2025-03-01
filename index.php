@@ -15,7 +15,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <section class="front" id="main">
@@ -25,13 +25,13 @@ session_start();
                 <a href="#main" id="home">Strona główna</a>
                 <a href="#about-us" id="aboutUs">O nas</a>
                 <a href="#footer" id="contact">Kontakt</a>
-                <a href="loty.php" id="flights">Loty</a>
-                <a href="gra.php" id="game">Gra online</a>
+                <a href="flights.php" id="flights">Loty</a>
+                <a href="game.php" id="game">Gra online</a>
             </div>
 
             <div class="header-right">
-                <a href="" class="btn-black btn-small">Zaloguj</a>
-                <a href="" class="btn-blue btn-small">Zarejestruj</a>
+                <a href="login.php" class="btn-black btn-small">Zaloguj</a>
+                <a href="register.php" class="btn-blue btn-small">Zarejestruj</a>
             </div>
         </header>
     
@@ -43,8 +43,8 @@ session_start();
             </p>
 
             <div class="main-buttons">
-                <a href="" class="btn-black">Zaloguj</a>
-                <a href="" class="btn-blue">Zarejestruj</a>
+                <a href="login.php" class="btn-black">Zaloguj</a>
+                <a href="register.php" class="btn-blue">Zarejestruj</a>
             </div>
         </main>
     </section>
@@ -69,8 +69,8 @@ session_start();
             </p>
 
             <div class="section-buttons">
-                <a href="" class="btn-white">Zaloguj</a>
-                <a href="" class="btn-blue">Zarejestruj</a>
+                <a href="login.php" class="btn-white">Zaloguj</a>
+                <a href="register.php" class="btn-blue">Zarejestruj</a>
             </div>
         </div>
 
@@ -89,8 +89,8 @@ session_start();
             </p>
 
             <div class="section-buttons">
-                <a href="" class="btn-white">Zaloguj</a>
-                <a href="" class="btn-blue">Zarejestruj</a>
+                <a href="login.php" class="btn-white">Zaloguj</a>
+                <a href="register.php" class="btn-blue">Zarejestruj</a>
             </div>
         </div>
 
@@ -127,8 +127,8 @@ session_start();
                     <p>Masz problem z rezerwacją? Zgłoś go, ale żeby to zrobić musisz się pierw zalogować!</p>
 
                     <div class="footer-row">
-                        <a href="" class="btn-white btn-vsmall">Zaloguj</a>                        
-                        <a href="" class="btn-blue btn-vsmall">Zarejestruj</a>                        
+                        <a href="login.php" class="btn-white btn-vsmall">Zaloguj</a>
+                        <a href="register.php" class="btn-blue btn-vsmall">Zarejestruj</a>
                     </div>
                 </div>
 
@@ -142,6 +142,6 @@ session_start();
 
 
 
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
