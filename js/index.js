@@ -52,10 +52,10 @@ const animateMarker = (to) => {
 const handleScroll = e => {
     if(window.scrollY > 0) {
         header.classList.add('header--scrolled');
-        headerLoginBtn.classList.add('btn-white');
+        if(headerLoginBtn) headerLoginBtn.classList.add('btn-white');
     } else {
         header.classList.remove('header--scrolled');
-        headerLoginBtn.classList.remove('btn-white');
+        if(headerLoginBtn) headerLoginBtn.classList.remove('btn-white');
     }
 
 

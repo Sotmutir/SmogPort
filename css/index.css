@@ -264,7 +264,7 @@ footer img[src="img/image.png"] {
     left: 0px;
 }
 
-footer a {
+.media-link {
     color: #fafafa;
     font-size: 10.3pt;
     font-family: "Roboto", sans-serif;
@@ -273,23 +273,26 @@ footer a {
 
     display: flex;
     flex-direction: row;
-    gap: 4px;
+    align-items: center;
+    gap: 8px;
 
-    margin: 0;
+    margin: 0 0 10px 0;
     padding: 0;
 
     transition-duration: 0.2s;
+
+    width: fit-content;
 }
 
 footer a:hover {
-    margin: -2px 0px 2px 0px;
+    margin: -2px 0px 12px 0px;
 
     font-weight: 700;
 }
 
 footer a img {
-    width: 35px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 
 footer h2 {
@@ -342,7 +345,7 @@ footer p {
 
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .footer-row {

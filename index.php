@@ -30,8 +30,14 @@ session_start();
             </div>
 
             <div class="header-right">
+                <?php if(!isset($_SESSION['uId'])) { ?>
                 <a href="login.php" class="btn-black btn-small">Zaloguj</a>
                 <a href="register.php" class="btn-blue btn-small">Zarejestruj</a>
+                <?php } else { ?>
+                <a href="fights.php" class="btn-black btn-small">Zarezerwuj lot</a>
+                <a href="myFlights.php">Moje loty</a>
+                <a href="scripts/logout.php">Wyloguj</a>
+                <?php } ?>
             </div>
         </header>
     
@@ -43,8 +49,12 @@ session_start();
             </p>
 
             <div class="main-buttons">
+                <?php if(!isset($_SESSION['uId'])) { ?>
                 <a href="login.php" class="btn-black">Zaloguj</a>
                 <a href="register.php" class="btn-blue">Zarejestruj</a>
+                <?php } else { ?>
+                <a href="fights.php" class="btn-black">Zarezerwuj lot</a>
+                <?php } ?>
             </div>
         </main>
     </section>
@@ -69,8 +79,12 @@ session_start();
             </p>
 
             <div class="section-buttons">
+                <?php if(!isset($_SESSION['uId'])) { ?>
                 <a href="login.php" class="btn-white">Zaloguj</a>
                 <a href="register.php" class="btn-blue">Zarejestruj</a>
+                <?php } else { ?>
+                <a href="fights.php" class="btn-blue">Zarezerwuj lot</a>
+                <?php } ?>
             </div>
         </div>
 
@@ -89,8 +103,12 @@ session_start();
             </p>
 
             <div class="section-buttons">
+                <?php if(!isset($_SESSION['uId'])) { ?>
                 <a href="login.php" class="btn-white">Zaloguj</a>
                 <a href="register.php" class="btn-blue">Zarejestruj</a>
+                <?php } else { ?>
+                <a href="fights.php" class="btn-blue">Zarezerwuj lot</a>
+                <?php } ?>
             </div>
         </div>
 
@@ -116,19 +134,27 @@ session_start();
             <div class="footer-col">
                 <h2>Nasze media społecznościowe</h2>
 
-                <a href=""><img src="" alt="FB">#GorzowSmogPort</a>
-                <a href=""><img src="" alt="X">#GorzowSmogPort</a>
-                <a href=""><img src="" alt="YT">#GorzowSmogPort</a>
-                <a href=""><img src="" alt="IG">#GorzowSmogPort</a>
+                <a href="" class="media-link"><img src="https://logo.clearbit.com/Facebook.com" alt="FB">#GorzowSmogPort</a>
+                <a href="" class="media-link"><img src="https://logo.clearbit.com/Twitter.com" alt="X">#GorzowSmogPort</a>
+                <a href="" class="media-link"><img src="https://logo.clearbit.com/Youtube.com" alt="YT">#GorzowSmogPort</a>
+                <a href="" class="media-link"><img src="https://logo.clearbit.com/Instagram.com" alt="IG">#GorzowSmogPort</a>
             </div>
 
             <div class="footer-col">
                 <div class="footer-col" style="width: calc(2 * 156px + 15px);">
+                    <?php if(!isset($_SESSION['uId'])) { ?>
                     <p>Masz problem z rezerwacją? Zgłoś go, ale żeby to zrobić musisz się pierw zalogować!</p>
+                    <?php } else { ?>
+                    <p>Masz problem z rezerwacją? Zgłoś go już teraz, a nasz zespół postara się go rozwiązać!</p>
+                    <?php } ?>
 
                     <div class="footer-row">
+                        <?php if(!isset($_SESSION['uId'])) { ?>
                         <a href="login.php" class="btn-white btn-vsmall">Zaloguj</a>
                         <a href="register.php" class="btn-blue btn-vsmall">Zarejestruj</a>
+                        <?php } else { ?>
+                        <a href="report.php" class="btn-blue btn-vsmall">Zgłoś problem</a>
+                        <?php } ?>
                     </div>
                 </div>
 

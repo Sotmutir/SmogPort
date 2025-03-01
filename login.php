@@ -2,7 +2,7 @@
 
 session_start();
 
-if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
+if(!isset($_SESSION['uId']) || !isset($_SESSION['uEmail'])) { ?>
 
 <!DOCTYPE html>
 <html lang="pl-PL">
@@ -15,7 +15,7 @@ if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
 </head>
 <body>
     <main id="front">
-        <form id="form">
+        <form id="form" action="scripts/auth.php" method="POST">
             <div class="front">
                 <div class="main-header">
                     <h1>Logowanie</h1>
@@ -29,13 +29,17 @@ if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
                 <div class="inputs">
                     <div class="form-row">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required maxlength="255">
                     </div>
     
                     <div class="form-row">
                         <label for="password">Hasło</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" required maxlength="45">
                     </div>
+
+                    <?php if(isset($_GET['error'])) { ?>
+                    <div class="error"><?=$_GET['error']?></div>
+                    <?php } ?>
     
                     <div class="form-row form-buttons">
                         <button type="submit" id="auth-btn" class="btn-blue">Zaloguj</button>
@@ -45,11 +49,10 @@ if(!isset($_SESSION['u_id']) || !isset($_SESSION['u_name'])) { ?>
             </div>
         </form>
     </main>
-
-    <script src="js/login.js"></script>
 </body>
 </html>
 
 <?php } else {
     header("Location: index.php");
+    exit();
 } ?>
