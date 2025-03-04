@@ -1,0 +1,123 @@
+body {
+    background-image: url("../img/image.png");
+    background-repeat: no-repeat;
+    background-position: cover 100%;
+
+    width: 100vw;
+    height: calc(100vh - 75px);
+}
+
+
+main {
+    width: 100%;
+    height: 100%;
+
+    background: rgba(36, 36, 36, 0.6);
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 50px;
+}
+
+
+
+.left, .right {
+    width: calc(600px - 50px);
+    height: calc(100% - 50px);
+
+    background-image: url("../img/zse.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    margin: 25px;
+
+    transition-duration: 0.5s;
+    opacity: 0.5;
+
+    border-radius: 25px;
+
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.39);
+}
+.right {
+    background-image: url("../img/image.png");
+}
+.left:hover, .right:hover, .left:hover .inner p, .right:hover .inner p, .left:hover .inner button, .right:hover .inner button {
+    opacity: 1;
+}
+.left:hover, .right:hover {
+    margin: 20px 30px 30px 20px;
+}
+
+
+.inner {
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 25px;
+
+    position: relative;
+
+    padding: 25px;
+}
+.inner-left {
+    background: linear-gradient(180deg, rgba(121, 22, 34, 0.8), #0c0d5065, #0d0e57);
+}
+.inner-right {
+    background: linear-gradient(180deg, rgba(22, 121, 100, 0.8), #0c0d5065, #0d0e57);
+}
+
+.inner img {
+    width: 60%;
+    height: auto;
+
+    margin-top: 10%;
+}
+
+.inner p {
+    position: absolute;
+    bottom: 10%;
+
+    opacity: 0;
+
+    transition-duration: 0.5s;
+}
+
+.inner button {
+    position: absolute;
+    bottom: calc(10% + 44px + 50px + 50px);
+
+    opacity: 0;
+
+    transition-duration: 0.5s;
+}
+
+
+
+
+#cover {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #323232;
+
+    opacity: 0;
+    display: none;
+
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1000;
+}

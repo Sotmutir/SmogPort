@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="25"
+   height="7.7839999"
+   viewBox="0 0 6.614583 2.0595167"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:export-filename="gunStation.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   sodipodi:docname="gunStation.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" /><defs
+     id="defs1" /><g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1"><g
+       id="g25"
+       inkscape:label="down"
+       transform="translate(-10.583333,-8.6110163)"><rect
+         style="fill:#3b3c35;fill-opacity:1;stroke-width:0.846619;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         id="rect10"
+         width="6.6145835"
+         height="1.3229166"
+         x="10.583333"
+         y="9.3477287" /><rect
+         style="fill:#3b3c35;fill-opacity:1;stroke-width:0.677295;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         id="rect11"
+         width="5.2916665"
+         height="1.0583333"
+         x="11.309846"
+         y="8.6110163" /></g></g></svg>
