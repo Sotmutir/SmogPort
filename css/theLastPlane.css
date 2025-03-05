@@ -13,12 +13,6 @@
     opacity: 0;
     display: none;
 
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
-    animation-name: animateCover;
-    animation-play-state: paused;
-    animation-timing-function: linear;
-
     position: absolute;
     top: 0px;
     left: 0px;
@@ -114,6 +108,16 @@ span {
 
 
     z-index: 300;
+}
+.plane{
+    height: 50px;
+    transform: translateX(0px);
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    rotate: 90deg;
 }
 
 

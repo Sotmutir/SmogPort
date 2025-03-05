@@ -1,5 +1,8 @@
 
 
+const LASER_COOLDOWN = 0.5;
+
+
 const back = document.getElementById('back');
 const cover = document.getElementById('cover');
 
@@ -8,6 +11,7 @@ const cover = document.getElementById('cover');
 var isRunning = false;
 var isRunningMode = false;
 var turretDeg = 0;
+var speed = 2;
 const play = document.getElementById('play');
 const main = document.getElementById('main');
 const turret = document.getElementById('turret');
@@ -20,7 +24,7 @@ const progress = document.getElementById('progress');
 
 back.addEventListener('click', () => {
     cover.style.display = 'block';
-    cover.style.animationPlayState = 'running';
+    cover.classList.add('cover-ani');
 
 
     setTimeout(() => {
@@ -29,8 +33,8 @@ back.addEventListener('click', () => {
             back.innerText = "Powrót";
             play.innerText = 'Graj';
 
-            cover.style.animationName = 'animateCover-reverse';
-            cover.style.animationPlayState = 'running';
+            cover.classList.remove('cover-ani');
+            cover.classList.add('cover-ani-rev');
 
             playArea.style.display = 'none';
 
@@ -38,6 +42,7 @@ back.addEventListener('click', () => {
             isRunning = false;
 
             setTimeout(() => {
+                cover.classList.remove('cover-ani-rev');
                 cover.style.display = 'none';
             }, 500);
         }
@@ -92,9 +97,12 @@ function start() {
         if(!isRunning) return;
 
         let w = parseInt(progress.style.width.replace('%', ''));
-        w += 2;
+        if(w + 1 / LASER_COOLDOWN <= 100) w += 1 / LASER_COOLDOWN;
         if(w <= 100) progress.style.width = w + '%';
     }, 10);
+
+
+    generatePlane();
 };
 
 
@@ -138,14 +146,48 @@ function fire() {
 }
 
 
+function generatePlane() {
+    const element = document.createElement('img');
+    element.src = 'img/planeWhite.svg';
+    element.className = 'plane';
+    element.style.transform = 'translateY(0px)';
+
+    const locY = Math.floor(Math.random() * (playArea.clientHeight - 50 - 500 - 25 + 1));
+    element.style.top = 100 + 'px';
+
+    playArea.appendChild(element);
+
+    const movingInterval = setInterval(() => {
+        let a = element.style.transform;
+        a = a.replace('translateY(', "");
+        a = a.replace('px)', "");
+        a = parseInt(a);
+
+        console.log(a + " | " + playArea.clientWidth);
+
+        if(a * (-1) <= playArea.clientWidth) {
+            a -= speed;
+            element.style.transform = `translateY(${a}px)`;
+        } else {
+            console.log('plane del')
+            playArea.removeChild(element);
+            clearInterval(movingInterval);
+        }
+    }, 10);
+}
+
+
 
 
 
 play.addEventListener('click', e => {
-    main.classList.add('main-ani-rev');
+    if(isRunningMode) main.classList.add('main-ani-rev');
+    else main.classList.add('main-ani');
 
     setTimeout(() => {
-        main.classList.remove('main-ani-rev');
+        if(isRunningMode) main.classList.remove('main-ani-rev');
+        else main.classList.remove('main-ani');
+
         main.style.display = 'none';
         if(isRunningMode) menuOpened = !menuOpened;
 
