@@ -148,7 +148,6 @@ play.addEventListener('click', e => {
         main.classList.remove('main-ani-rev');
         main.style.display = 'none';
         if(isRunningMode) menuOpened = !menuOpened;
-        
 
         isRunning = true;
         isRunningMode = true;
