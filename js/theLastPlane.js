@@ -1,6 +1,6 @@
 
 
-const LASER_COOLDOWN = 0.5;
+var LASER_COOLDOWN = 0.5;
 
 
 const back = document.getElementById('back');
@@ -11,7 +11,12 @@ const cover = document.getElementById('cover');
 var isRunning = false;
 var isRunningMode = false;
 var turretDeg = 0;
-var speed = 2;
+var speed = 1;
+var playedSeconds = 0;
+var planes = [];
+var eliminated = 0;
+var hearts = 3;
+const eliminatedDisplay = document.getElementById('eliminated');
 const play = document.getElementById('play');
 const main = document.getElementById('main');
 const turret = document.getElementById('turret');
@@ -97,12 +102,36 @@ function start() {
         if(!isRunning) return;
 
         let w = parseInt(progress.style.width.replace('%', ''));
+        
         if(w + 1 / LASER_COOLDOWN <= 100) w += 1 / LASER_COOLDOWN;
-        if(w <= 100) progress.style.width = w + '%';
+        else if(w < 100) w = 100;
+
+        if(w <= 100) {
+            progress.style.width = w + '%';
+        }
     }, 10);
 
 
-    generatePlane();
+    const generatingInterval = setInterval(() => {
+        if(!isRunningMode) {
+            playedSeconds = 0;
+            speed = 1;
+            LASER_COOLDOWN = 0.5;
+
+            clearInterval(generatingInterval);
+            return;
+        }
+        if(!isRunning) return;
+
+        playedSeconds++;
+        if(playedSeconds % 2 === 0) generatePlane();
+        
+        if(playedSeconds % 45 === 0) {
+            speed += 0.3;
+            if(LASER_COOLDOWN > 0.1) LASER_COOLDOWN -= 0.08;
+            console.log(speed, LASER_COOLDOWN);
+        }
+    }, 1000);
 };
 
 
@@ -138,10 +167,29 @@ function fire() {
         if(a <= max) {
             playArea.removeChild(beam);
             clearInterval(movingInterval);
+            return;
         } else {
-            a -= 5;
+            a -= 8;
             beam.style.transform = `translateY(${a}px)`;
         }
+
+        
+        const newPlanes = [];
+        for(let i = 0; i < planes.length; i++) {
+            const plane = planes[i];
+            
+            if(czyNachodza(plane, beam)) {
+                eliminated++;
+                eliminatedDisplay.innerText = eliminated;
+
+                playArea.removeChild(beam);
+                playArea.removeChild(plane);
+                clearInterval(movingInterval);
+            } else {
+                newPlanes.push(plane);
+            }
+        }
+        planes = newPlanes;
     }, 10);
 }
 
@@ -150,32 +198,66 @@ function generatePlane() {
     const element = document.createElement('img');
     element.src = 'img/planeWhite.svg';
     element.className = 'plane';
-    element.style.transform = 'translateY(0px)';
+    element.style.left = 0 + 'px';
 
     const locY = Math.floor(Math.random() * (playArea.clientHeight - 50 - 500 - 25 + 1));
-    element.style.top = 100 + 'px';
+    element.style.top = locY + 'px';
 
     playArea.appendChild(element);
+    planes.push(element);
 
     const movingInterval = setInterval(() => {
-        let a = element.style.transform;
-        a = a.replace('translateY(', "");
-        a = a.replace('px)', "");
-        a = parseInt(a);
+        if(!planes.includes(element)) {
+            clearInterval(movingInterval);
+            return;
+        }
+        if(!isRunning) return;
 
-        console.log(a + " | " + playArea.clientWidth);
+        let a = parseFloat(element.style.left.replace('px', ""));
 
-        if(a * (-1) <= playArea.clientWidth) {
-            a -= speed;
-            element.style.transform = `translateY(${a}px)`;
+        if(a <= playArea.clientWidth) {
+            a += speed;
+            element.style.left = a + 'px';
         } else {
-            console.log('plane del')
+            hearts--;
+            switch(hearts) {
+                case 2: {
+                    document.getElementById('heart1').style.display = 'none';
+                    break;
+                }
+                case 1: {
+                    document.getElementById('heart2').style.display = 'none';
+                    break;
+                }
+                case 0: {
+                    document.getElementById('heart3').style.display = 'none';
+                    
+                    
+                    
+                    break;
+                }
+            }
+
             playArea.removeChild(element);
             clearInterval(movingInterval);
         }
     }, 10);
 }
 
+
+
+function czyNachodza(element1, element2) {
+    const rect1 = element1.getBoundingClientRect();
+    const rect2 = element2.getBoundingClientRect();
+
+    // Sprawdzenie, czy elementy się przecinają
+    return !(
+        rect1.bottom < rect2.top || // rect1 jest powyżej rect2
+        rect1.top > rect2.bottom || // rect1 jest poniżej rect2
+        rect1.right < rect2.left || // rect1 jest na lewo od rect2
+        rect1.left > rect2.right    // rect1 jest na prawo od rect2
+    );
+}
 
 
 
