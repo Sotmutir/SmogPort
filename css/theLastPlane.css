@@ -15,6 +15,8 @@
 
     animation-duration: 0.5s;
     animation-fill-mode: both;
+    animation-name: animateCover;
+    animation-play-state: paused;
     animation-timing-function: linear;
 
     position: absolute;
@@ -50,9 +52,7 @@ main {
     justify-content: flex-start;
     gap: 50px;
 
-    animation: 0.3s animateCover both linear;
-    animation-play-state: paused;
-    animation-direction: reverse;
+    
 
     z-index: 100;
 

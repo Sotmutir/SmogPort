@@ -2,38 +2,11 @@
 
 const back = document.getElementById('back');
 const cover = document.getElementById('cover');
-back.addEventListener('click', () => {
-    cover.style.display = 'block';
-    cover.style.animationName = 'animateCover';
-
-    setTimeout(() => {
-        window.location.href = 'game.php';
-    }, 500);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 var isRunning = false;
+var isRunningMode = false;
 var turretDeg = 0;
 const play = document.getElementById('play');
 const main = document.getElementById('main');
@@ -43,24 +16,62 @@ const progress = document.getElementById('progress');
 
 
 
-{
-    let menuOpened = false;
-    window.addEventListener('keydown', e => {
-        if(e.key === 'Escape') {
-            if(!menuOpened) {
-                isRunning = false;
-        
-                main.style.display = 'flex'; 
-            } else {
-                isRunning = true;
-        
-                main.style.display = 'none'; 
-            }
 
-            menuOpened = !menuOpened;
+
+back.addEventListener('click', () => {
+    cover.style.display = 'block';
+    cover.style.animationPlayState = 'running';
+
+
+    setTimeout(() => {
+        if(!isRunningMode) window.location.href = 'game.php';
+        else {
+            back.innerText = "Powrót";
+            play.innerText = 'Graj';
+
+            cover.style.animationName = 'animateCover-reverse';
+            cover.style.animationPlayState = 'running';
+
+            playArea.style.display = 'none';
+
+            isRunningMode = false;
+            isRunning = false;
+
+            setTimeout(() => {
+                cover.style.display = 'none';
+            }, 500);
         }
-    });
-}
+    }, 500);
+});
+
+
+
+
+var menuOpened = false;
+window.addEventListener('keydown', e => {
+    if(e.key === 'Escape') {
+        if(!menuOpened) {
+            isRunning = false;
+    
+            main.style.display = 'flex';
+            main.classList.add('main-ani');
+
+            setTimeout(() => {
+                main.classList.remove('main-ani');
+            }, 300);
+        } else {
+            main.classList.add('main-ani-rev');
+
+            setTimeout(() => {
+                isRunning = true;
+                main.classList.remove('main-ani-rev');
+                main.style.display = 'none'; 
+            }, 300);
+        }
+
+        menuOpened = !menuOpened;
+    }
+});
 
 
 
@@ -70,13 +81,14 @@ function start() {
     playArea.style.display = 'flex';
 
     back.innerText = "Powrót do menu";
-    play.innerText = 'Poddaj się';
+    play.innerText = 'Konntynuuj';
 
     main.style.animationDirection = 'normal';
     main.style.animationPlayState = 'running';
 
 
     const chargeInterval = setInterval(() => {
+        if(!isRunningMode) clearInterval(chargeInterval);
         if(!isRunning) return;
 
         let w = parseInt(progress.style.width.replace('%', ''));
@@ -102,7 +114,12 @@ function fire() {
     playArea.appendChild(beam);
 
     const movingInterval = setInterval(() => {
+        if(!isRunningMode) {
+            playArea.removeChild(beam);
+            clearInterval(movingInterval);
+        }
         if(!isRunning) return;
+        
         
         let a = beam.style.transform;
         a = a.replace('translateY(', "");
@@ -125,9 +142,15 @@ function fire() {
 
 
 play.addEventListener('click', e => {
+    main.classList.add('main-ani-rev');
+
     setTimeout(() => {
+        main.classList.remove('main-ani-rev');
         main.style.display = 'none';
+        if(isRunningMode) menuOpened = !menuOpened;
+
         isRunning = true;
+        isRunningMode = true;
 
         start();
 
