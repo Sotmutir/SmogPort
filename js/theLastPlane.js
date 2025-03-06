@@ -17,11 +17,15 @@ var planes = [];
 var eliminated = 0;
 var hearts = 3;
 const eliminatedDisplay = document.getElementById('eliminated');
+const lastScoreDisplay = document.getElementById('last-score');
+const bestScoreDisplay = document.getElementById('best-score');
 const play = document.getElementById('play');
 const main = document.getElementById('main');
 const turret = document.getElementById('turret');
 const playArea = document.getElementById('play-area');
 const progress = document.getElementById('progress');
+
+setScores();
 
 
 
@@ -33,18 +37,12 @@ back.addEventListener('click', () => {
 
 
     setTimeout(() => {
-        if(!isRunningMode) window.location.href = 'game.php';
+        if(!isRunningMode) window.location.href = 'index.php';
         else {
-            back.innerText = "Powrót";
-            play.innerText = 'Graj';
-
             cover.classList.remove('cover-ani');
             cover.classList.add('cover-ani-rev');
 
-            playArea.style.display = 'none';
-
-            isRunningMode = false;
-            isRunning = false;
+            stop();
 
             setTimeout(() => {
                 cover.classList.remove('cover-ani-rev');
@@ -53,6 +51,58 @@ back.addEventListener('click', () => {
         }
     }, 500);
 });
+
+
+
+function stop() {
+    playArea.style.display = 'none';
+    
+    back.innerText = "Powrót";
+    play.innerText = 'Graj';
+
+    isRunningMode = false;
+    isRunning = false;
+
+    hearts = 3;
+    playedSeconds = 0;
+    speed = 1;
+    LASER_COOLDOWN = 0.5;
+
+    fetch(`scripts/addTLPScore.php?score=${eliminated}`);
+    eliminated = 0;
+
+    setScores();
+}
+
+
+function setScores() {
+    let display = false;
+    fetch(`scripts/getTLPLastScore.php`).then(res => res.text()).then(data => {
+        if(data && data != 'null') lastScoreDisplay.innerHTML = data;
+        else display = true;
+    });
+
+    setTimeout(() => {
+        fetch(`scripts/getTLPBestScore.php`).then(res => res.text()).then(data => {
+            if(data && data != 'null') bestScoreDisplay.innerHTML = data;
+            else display = true;
+        });
+    }, 10);
+
+    displayIntroduction(display);
+}
+
+
+function displayIntroduction(toDisplay) {
+    if(toDisplay) {document.getElementById('introduction-col').style.display = 'initial';
+        document.getElementById('best-score-col').style.display = 'none';
+        document.getElementById('last-score-col').style.display = 'none';
+    } else {
+        document.getElementById('introduction-col').style.display = 'none';
+        document.getElementById('best-score-col').style.display = 'initial';
+        document.getElementById('last-score-col').style.display = 'initial';
+    }
+}
 
 
 
@@ -86,6 +136,20 @@ window.addEventListener('keydown', e => {
 
 
 function start() {
+    eliminated = 0;
+    hearts = 3;
+    playedSeconds = 0;
+    speed = 1;
+    LASER_COOLDOWN = 0.5;
+
+
+    eliminatedDisplay.innerText = eliminated;
+
+    document.getElementById('heart1').style.display = 'initial';
+    document.getElementById('heart2').style.display = 'initial';
+    document.getElementById('heart3').style.display = 'initial';
+    
+
     main.style.animationPlayState = 'running';
     progress.style.width = '0%';
     playArea.style.display = 'flex';
@@ -95,6 +159,8 @@ function start() {
 
     main.style.animationDirection = 'normal';
     main.style.animationPlayState = 'running';
+
+    
 
 
     const chargeInterval = setInterval(() => {
@@ -114,10 +180,6 @@ function start() {
 
     const generatingInterval = setInterval(() => {
         if(!isRunningMode) {
-            playedSeconds = 0;
-            speed = 1;
-            LASER_COOLDOWN = 0.5;
-
             clearInterval(generatingInterval);
             return;
         }
@@ -207,6 +269,11 @@ function generatePlane() {
     planes.push(element);
 
     const movingInterval = setInterval(() => {
+        if(!isRunningMode) {
+            playArea.removeChild(element);
+            clearInterval(movingInterval);
+            return;
+        }
         if(!planes.includes(element)) {
             clearInterval(movingInterval);
             return;
@@ -232,8 +299,18 @@ function generatePlane() {
                 case 0: {
                     document.getElementById('heart3').style.display = 'none';
                     
+                    isRunning = false;
+                    isRunningMode = false;
                     
+                    stop();
+
                     
+                    main.style.display = 'flex';
+                    main.classList.add('main-ani');
+                    setTimeout(() => {
+                        main.classList.remove('main-ani');
+                    }, 300);
+
                     break;
                 }
             }

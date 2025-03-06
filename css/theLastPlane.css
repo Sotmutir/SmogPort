@@ -66,7 +66,13 @@ main {
 .col {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 25px;
+}
+
+.col h2 {
+    margin-bottom: 25px;
 }
 
 .buttons {
@@ -86,13 +92,24 @@ h2 {
     text-align: center;
 }
 span {
-    color: #fafafa;
-    font-family: 'Roboto', sans-serif;
+    color: #00ca65;
+    font-family: 'Press Start 2P', sans-serif;
     /* font-weight: bold; */
     text-align: center;
     font-size: 20pt;
 }
 
+
+
+#introduction-col {
+    display: none;
+
+    color: #fafafa;
+    font-family: 'Roboto', sans-serif;
+    font-size: 17pt;
+    text-align: center;
+    line-height: 35px;
+}
 
 
 
