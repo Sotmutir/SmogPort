@@ -126,6 +126,7 @@
     animation-play-state: running;
     animation-direction: reverse;
 }
+
 @keyframes animateCover {
     0% {
         opacity: 0;
