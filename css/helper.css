@@ -90,11 +90,74 @@
 
 
 
+.cover-ani {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-name: animateCover;
+    animation-timing-function: linear;
+}
+.cover-ani-rev {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-name: animateCover-reverse;
+    animation-timing-function: linear;
+}
+
+.cover-ani2 {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-name: animateCover2;
+    animation-timing-function: linear;
+}
+.cover-ani2-rev {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-name: animateCover2-reverse;
+    animation-timing-function: linear;
+}
+
+.main-ani {
+    animation: 0.3s animateCover both linear;
+    animation-play-state: running;
+    animation-direction: reverse;
+}
+.main-ani-rev {
+    animation: 0.3s animateCover-reverse both linear;
+    animation-play-state: running;
+    animation-direction: reverse;
+}
+
 @keyframes animateCover {
     0% {
         opacity: 0;
     }
     100% {
         opacity: 1;
+    }
+}
+@keyframes animateCover-reverse {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+@keyframes animateCover2 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+@keyframes animateCover2-reverse {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.7;
     }
 }
