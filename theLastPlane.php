@@ -27,14 +27,23 @@ if(isset($_SESSION['uId']) && isset($_SESSION['uEmail'])) { ?>
         <img src="img/theLastPlaneLogo.svg" alt="The last plane" id="game-logo">
 
         <div class="row">
-            <div class="col">
+            <div class="col" id="last-score-col">
                 <h2>Ostatni wynik</h2>
-                <span id="last-score">213 zestrzeleń</span>
+                <span id="last-score"></span>
             </div>
 
-            <div class="col">
+            <div class="col" id="best-score-col">
                 <h2>Najlepszy wynik</h2>
-                <span id="best-score">309 zestrzeleń</span>
+                <span id="best-score"></span>
+            </div>
+
+            <div class="col" id="introduction-col">
+                <p>
+                Witaj w The last plane! W tej grze twoim celem jest zestrzeliwanie<br>
+                wrogich samolotów, które chcą jakby nigdy nic przelecieć podczas twojej warty,<br>
+                chyba im na to nie pozwolisz? Zestrzeliwuj samoloty i zyskuj punkty.<br>
+                Masz do wykorzystania 3 życia, lepiej ich nie zmarnuj.
+                </p>
             </div>
         </div>
 

@@ -13,7 +13,6 @@ if(isset($_SESSION['uId']) && isset($_SESSION['uEmail'])) { ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smog port - Game Zone</title>
 
-    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/helper.css">
     <link rel="stylesheet" href="css/game.css">
 </head>
