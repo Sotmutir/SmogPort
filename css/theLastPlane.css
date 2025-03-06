@@ -13,6 +13,10 @@
     opacity: 0;
     display: none;
 
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+
     position: absolute;
     top: 0px;
     left: 0px;
@@ -46,7 +50,9 @@ main {
     justify-content: flex-start;
     gap: 50px;
 
-    
+    animation: 0.3s animateCover both linear;
+    animation-play-state: paused;
+    animation-direction: reverse;
 
     z-index: 100;
 
@@ -97,13 +103,6 @@ span {
 
 
 
-.beam, .plane, #charge-progressbar, #progress, #turret-station, #turret, #play-area {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none; 
-}
-
 
 .beam {
     /* width: 5px; */
@@ -116,31 +115,10 @@ span {
 
     z-index: 300;
 }
-.plane{
-    height: 50px;
-    transform: translateX(0px);
-
-    position: absolute;
-    left: 0px;
-    top: 0px;
-
-    rotate: 90deg;
-}
-.heart {
-    width: 15px;
-
-    z-index: 550;
-}
 
 
-#play-area .row {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    
-    position: absolute;
-    bottom: 8px;
-}
+
+
 
 
 #charge-progressbar {
@@ -157,7 +135,7 @@ span {
     height: 100%;
     width: 0%;
 
-    background-color: #00ca65;
+    background-color: rgb(24, 88, 134);
 }
 
 #turret-station {
@@ -174,19 +152,6 @@ span {
 
     position: absolute;
     bottom: 42px;
-
-    z-index: 500;
-}
-
-#eliminated {
-    text-align: center;
-    font-weight: bold;
-    font-family: "Press Start 2P", sans-serif;
-    font-size: 15pt;
-    color: #00ca65;
-
-    position: absolute;
-    bottom: 20px;
 
     z-index: 500;
 }

@@ -8,38 +8,60 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smog port - Strona główna</title>
-
-
+    <meta name="keywords" content="Gorzów Smogport, lotnisko, rezerwacja lotów, tanie loty, Gorzów Wielkopolski, Zespół Szkół Elektrycznych, gra online, czyste powietrze, innowacyjne technologie, podróże">
+    <meta name="description" content="Gorzów Smogport to innowacyjne lotnisko w Gorzowie Wielkopolskim. Oferujemy najlepsze loty w całym Imperium GoRzOwSkIm. Zarezerwuj lot online lub dołącz do naszej gry!">
+    <meta name="author" content="Jan Matysik, Julian Machowski 3TP">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <section class="front" id="main">
-        <header>
-            <div class="header-left">
-                <img src="img/planeWhite.svg" id="headerMarker">
-                <a href="#main" id="home">Strona główna</a>
-                <a href="#about-us" id="aboutUs">O nas</a>
-                <a href="#footer" id="contact">Kontakt</a>
-                <a href="flights.php" id="flights">Loty</a>
-                <a href="game.php" id="game">Gra online</a>
-            </div>
+    <header>
+    <div class="header-left">
+        <img src="img/planeWhite.svg" id="headerMarker">
+        <a href="#main" id="home">Strona główna</a>
+        <a href="#about-us" id="aboutUs">O nas</a>
+        <a href="#footer" id="contact">Kontakt</a>
+        <a href="flights.php" id="flights">Loty</a>
+        <a href="game.php" id="game">Gra online</a>
+    </div>
 
-            <div class="header-right">
-                <?php if(!isset($_SESSION['uId'])) { ?>
-                <a href="login.php" class="btn-black btn-small">Zaloguj</a>
-                <a href="register.php" class="btn-blue btn-small">Zarejestruj</a>
-                <?php } else { ?>
-                <a href="fights.php" class="btn-black btn-small">Zarezerwuj lot</a>
-                <a href="myFlights.php">Moje loty</a>
-                <a href="scripts/logout.php">Wyloguj</a>
-                <?php } ?>
-            </div>
-        </header>
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#main">Strona główna</a>
+        <a href="#about-us">O nas</a>
+        <a href="flights.php">Loty</a>
+        <a href="game.php">Gra online</a>
+        <?php if (!isset($_SESSION['uId'])) { ?>
+        <?php } else { ?>
+            <a href="report.php">Kontakt</a>
+            <a href="fights.php" class="btn-black btn-small">Zarezerwuj lot</a>
+            <a href="myFlights.php">Moje loty</a>
+            <a href="scripts/logout.php">Wyloguj</a>
+        <?php } ?>
+    </div>
+
+    <div class="header-right">
+        <?php if (!isset($_SESSION['uId'])) { ?>
+            <a href="login.php" class="btn-black btn-small">Zaloguj</a>
+            <a href="register.php" class="btn-blue btn-small">Zarejestruj</a>
+        <?php } else { ?>
+            <a href="fights.php" class="btn-black btn-small">Zarezerwuj lot</a>
+            <a href="myFlights.php">Moje loty</a>
+            <a href="scripts/logout.php">Wyloguj</a>
+        <?php } ?>
+    </div>
+</header>
+
     
         <main>
             <h1>Gorzów Smogport</h1>
@@ -94,7 +116,7 @@ session_start();
     </section>
 
 
-    <section class="location">
+    <section class="location" id="history">
         <div class="left">
             <h1>Nasza historia</h1>
 
@@ -131,7 +153,7 @@ session_start();
         </div>
 
         <div class="footer-content">
-            <div class="footer-col">
+            <div class="footer-col" id="footer-links">
                 <h2>Nasze media społecznościowe</h2>
 
                 <a href="" class="media-link"><img src="https://logo.clearbit.com/Facebook.com" alt="FB">#GorzowSmogPort</a>
@@ -167,7 +189,14 @@ session_start();
     </footer>
 
 
+    <script>
+const hamburgerMenu = document.getElementById('hamburgerMenu');
+const mobileMenu = document.getElementById('mobileMenu');
 
+hamburgerMenu.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+});
+</script>
     <script src="js/index.js"></script>
 </body>
 </html>

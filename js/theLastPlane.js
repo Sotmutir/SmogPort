@@ -1,22 +1,40 @@
 
 
-var LASER_COOLDOWN = 0.5;
-
-
 const back = document.getElementById('back');
 const cover = document.getElementById('cover');
+back.addEventListener('click', () => {
+    cover.style.display = 'block';
+    cover.style.animationName = 'animateCover';
+
+    setTimeout(() => {
+        window.location.href = 'game.php';
+    }, 500);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 var isRunning = false;
-var isRunningMode = false;
 var turretDeg = 0;
-var speed = 1;
-var playedSeconds = 0;
-var planes = [];
-var eliminated = 0;
-var hearts = 3;
-const eliminatedDisplay = document.getElementById('eliminated');
 const play = document.getElementById('play');
 const main = document.getElementById('main');
 const turret = document.getElementById('turret');
@@ -25,63 +43,24 @@ const progress = document.getElementById('progress');
 
 
 
-
-
-back.addEventListener('click', () => {
-    cover.style.display = 'block';
-    cover.classList.add('cover-ani');
-
-
-    setTimeout(() => {
-        if(!isRunningMode) window.location.href = 'game.php';
-        else {
-            back.innerText = "Powrót";
-            play.innerText = 'Graj';
-
-            cover.classList.remove('cover-ani');
-            cover.classList.add('cover-ani-rev');
-
-            playArea.style.display = 'none';
-
-            isRunningMode = false;
-            isRunning = false;
-
-            setTimeout(() => {
-                cover.classList.remove('cover-ani-rev');
-                cover.style.display = 'none';
-            }, 500);
-        }
-    }, 500);
-});
-
-
-
-
-var menuOpened = false;
-window.addEventListener('keydown', e => {
-    if(e.key === 'Escape') {
-        if(!menuOpened) {
-            isRunning = false;
-    
-            main.style.display = 'flex';
-            main.classList.add('main-ani');
-
-            setTimeout(() => {
-                main.classList.remove('main-ani');
-            }, 300);
-        } else {
-            main.classList.add('main-ani-rev');
-
-            setTimeout(() => {
+{
+    let menuOpened = false;
+    window.addEventListener('keydown', e => {
+        if(e.key === 'Escape') {
+            if(!menuOpened) {
+                isRunning = false;
+        
+                main.style.display = 'flex'; 
+            } else {
                 isRunning = true;
-                main.classList.remove('main-ani-rev');
+        
                 main.style.display = 'none'; 
-            }, 300);
-        }
+            }
 
-        menuOpened = !menuOpened;
-    }
-});
+            menuOpened = !menuOpened;
+        }
+    });
+}
 
 
 
@@ -91,47 +70,19 @@ function start() {
     playArea.style.display = 'flex';
 
     back.innerText = "Powrót do menu";
-    play.innerText = 'Konntynuuj';
+    play.innerText = 'Poddaj się';
 
     main.style.animationDirection = 'normal';
     main.style.animationPlayState = 'running';
 
 
     const chargeInterval = setInterval(() => {
-        if(!isRunningMode) clearInterval(chargeInterval);
         if(!isRunning) return;
 
         let w = parseInt(progress.style.width.replace('%', ''));
-        
-        if(w + 1 / LASER_COOLDOWN <= 100) w += 1 / LASER_COOLDOWN;
-        else if(w < 100) w = 100;
-
-        if(w <= 100) {
-            progress.style.width = w + '%';
-        }
+        w += 2;
+        if(w <= 100) progress.style.width = w + '%';
     }, 10);
-
-
-    const generatingInterval = setInterval(() => {
-        if(!isRunningMode) {
-            playedSeconds = 0;
-            speed = 1;
-            LASER_COOLDOWN = 0.5;
-
-            clearInterval(generatingInterval);
-            return;
-        }
-        if(!isRunning) return;
-
-        playedSeconds++;
-        if(playedSeconds % 2 === 0) generatePlane();
-        
-        if(playedSeconds % 45 === 0) {
-            speed += 0.3;
-            if(LASER_COOLDOWN > 0.1) LASER_COOLDOWN -= 0.08;
-            console.log(speed, LASER_COOLDOWN);
-        }
-    }, 1000);
 };
 
 
@@ -151,12 +102,7 @@ function fire() {
     playArea.appendChild(beam);
 
     const movingInterval = setInterval(() => {
-        if(!isRunningMode) {
-            playArea.removeChild(beam);
-            clearInterval(movingInterval);
-        }
         if(!isRunning) return;
-        
         
         let a = beam.style.transform;
         a = a.replace('translateY(', "");
@@ -167,114 +113,21 @@ function fire() {
         if(a <= max) {
             playArea.removeChild(beam);
             clearInterval(movingInterval);
-            return;
         } else {
-            a -= 8;
+            a -= 5;
             beam.style.transform = `translateY(${a}px)`;
         }
-
-        
-        const newPlanes = [];
-        for(let i = 0; i < planes.length; i++) {
-            const plane = planes[i];
-            
-            if(czyNachodza(plane, beam)) {
-                eliminated++;
-                eliminatedDisplay.innerText = eliminated;
-
-                playArea.removeChild(beam);
-                playArea.removeChild(plane);
-                clearInterval(movingInterval);
-            } else {
-                newPlanes.push(plane);
-            }
-        }
-        planes = newPlanes;
     }, 10);
 }
 
-
-function generatePlane() {
-    const element = document.createElement('img');
-    element.src = 'img/planeWhite.svg';
-    element.className = 'plane';
-    element.style.left = 0 + 'px';
-
-    const locY = Math.floor(Math.random() * (playArea.clientHeight - 50 - 500 - 25 + 1));
-    element.style.top = locY + 'px';
-
-    playArea.appendChild(element);
-    planes.push(element);
-
-    const movingInterval = setInterval(() => {
-        if(!planes.includes(element)) {
-            clearInterval(movingInterval);
-            return;
-        }
-        if(!isRunning) return;
-
-        let a = parseFloat(element.style.left.replace('px', ""));
-
-        if(a <= playArea.clientWidth) {
-            a += speed;
-            element.style.left = a + 'px';
-        } else {
-            hearts--;
-            switch(hearts) {
-                case 2: {
-                    document.getElementById('heart1').style.display = 'none';
-                    break;
-                }
-                case 1: {
-                    document.getElementById('heart2').style.display = 'none';
-                    break;
-                }
-                case 0: {
-                    document.getElementById('heart3').style.display = 'none';
-                    
-                    
-                    
-                    break;
-                }
-            }
-
-            playArea.removeChild(element);
-            clearInterval(movingInterval);
-        }
-    }, 10);
-}
-
-
-
-function czyNachodza(element1, element2) {
-    const rect1 = element1.getBoundingClientRect();
-    const rect2 = element2.getBoundingClientRect();
-
-    // Sprawdzenie, czy elementy się przecinają
-    return !(
-        rect1.bottom < rect2.top || // rect1 jest powyżej rect2
-        rect1.top > rect2.bottom || // rect1 jest poniżej rect2
-        rect1.right < rect2.left || // rect1 jest na lewo od rect2
-        rect1.left > rect2.right    // rect1 jest na prawo od rect2
-    );
-}
 
 
 
 
 play.addEventListener('click', e => {
-    if(isRunningMode) main.classList.add('main-ani-rev');
-    else main.classList.add('main-ani');
-
     setTimeout(() => {
-        if(isRunningMode) main.classList.remove('main-ani-rev');
-        else main.classList.remove('main-ani');
-
         main.style.display = 'none';
-        if(isRunningMode) menuOpened = !menuOpened;
-
         isRunning = true;
-        isRunningMode = true;
 
         start();
 
