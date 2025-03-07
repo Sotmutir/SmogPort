@@ -191,7 +191,6 @@ function start() {
         if(playedSeconds % 45 === 0) {
             speed += 0.3;
             if(LASER_COOLDOWN > 0.1) LASER_COOLDOWN -= 0.08;
-            console.log(speed, LASER_COOLDOWN);
         }
     }, 1000);
 };

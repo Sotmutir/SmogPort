@@ -39,7 +39,7 @@ session_start();
             <a href="login.php" class="btn-black btn-small">Zaloguj</a>
             <a href="register.php" class="btn-blue btn-small">Zarejestruj</a>
             <?php } else { ?>
-            <a href="">Moje loty</a>
+            <a href="" id="my-flights">Moje loty</a>
             <a href="scripts/logout.php">Wyloguj</a>
             <?php } ?>
         </div>
@@ -48,62 +48,14 @@ session_start();
     <div id="cover"></div>
 
     <main>
-        <div class="container mt-5">
-            <select id="airline">
-                <option value="airlines">Linia lotnicza</option>
-                
-                <?php
-                include "scripts/conn.php";
-
-                $stmt = $conn->prepare("SELECT DISTINCT Airline FROM flights;");
-
-                try {
-                    $stmt->execute();
-    
-                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($result as $row) {
-                        echo "
-                        <option value=\"{$row['Airline']}\">{$row['Airline']}</option>
-                        ";
-                    }
-                } catch(Exception $e) { }
-                ?>
-            </select>
-
-            <input type="date" name="date" id="date" value="Data">
-
-            <select id="destination">
-                <option value="destination">Miasto docelowe</option>
-
-                <?php
-                include "scripts/conn.php";
-
-                $stmt = $conn->prepare("SELECT DISTINCT Destination as City, DestinationCountry as Country FROM flights;");
-
-                try {
-                    $stmt->execute();
-    
-                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($result as $row) {
-                        echo "
-                        <option value=\"{$row['City']}\">{$row['Country']} {$row['City']}</option>
-                        ";
-                    }
-                } catch(Exception $e) { }
-                ?>
-            </select>
-        </div>
-
-
         <div id="main">
             <?php
-                include "scripts/getFlights.php";
+                include "scripts/getMyFlights.php";
             ?>
-            
         </div>
     </main>
 
 
-    <script src="js/flights.js"></script>
+    <script src="js/myFlights.js"></script>
 </body>
 </html>
