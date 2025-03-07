@@ -11,9 +11,12 @@ session_start();
     <meta name="keywords" content="Gorzów Smogport, lotnisko, rezerwacja lotów, tanie loty, Gorzów Wielkopolski, Zespół Szkół Elektrycznych, gra online, czyste powietrze, innowacyjne technologie, podróże">
     <meta name="description" content="Gorzów Smogport to innowacyjne lotnisko w Gorzowie Wielkopolskim. Oferujemy najlepsze loty w całym Imperium GoRzOwSkIm. Zarezerwuj lot online lub dołącz do naszej gry!">
     <meta name="author" content="Jan Matysik, Julian Machowski 3TP">
+    
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="css/index.css">
@@ -27,7 +30,7 @@ session_start();
         <a href="#about-us" id="aboutUs">O nas</a>
         <a href="#footer" id="contact">Kontakt</a>
         <a href="flights.php" id="flights">Loty</a>
-        <a href="game.php" id="game">Gra online</a>
+        <a href="theLastPlane.php" id="game">Gra online</a>
     </div>
 
     <div class="hamburger-menu" id="hamburgerMenu">

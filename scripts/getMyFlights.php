@@ -8,15 +8,7 @@ if(session_status() != PHP_SESSION_ACTIVE) session_start();
 
 $arr = array();
 
-
-$sql = "SELECT `Id`, 
-    DATE_FORMAT(DepartureTime, '%d.%m.%Y') AS `DepartureDate`, 
-    DATE_FORMAT(DepartureTime, '%H:%i') AS `DepartureTime`, 
-    DATE_FORMAT(ArrivalTime, '%d.%m.%Y') AS `ArrivalDate`, 
-    DATE_FORMAT(ArrivalTime, '%H:%i') AS `ArrivalTime`, 
-    `Airline`, `Cost`, `Departure`, `Destination` 
-    FROM `flights`
-    WHERE DATE_FORMAT(DepartureTime, '%d.%m.%Y') >= ";
+$sql;
 
 if(isset($_SESSION['uId']) && isset($_SESSION['uEmail'])) {
     $sql = "SELECT f.`Id`, 
@@ -24,38 +16,13 @@ if(isset($_SESSION['uId']) && isset($_SESSION['uEmail'])) {
     DATE_FORMAT(f.DepartureTime, '%H:%i') AS `DepartureTime`, 
     DATE_FORMAT(f.ArrivalTime, '%d.%m.%Y') AS `ArrivalDate`, 
     DATE_FORMAT(f.ArrivalTime, '%H:%i') AS `ArrivalTime`, 
-    f.`Airline`, f.`Cost`, f.`Departure`, f.`Destination`,
-    IF(r.FlightId IS NOT NULL, \"true\", \"false\") AS `isReserved`
+    f.`Airline`, f.`Cost`, f.`Departure`, f.`Destination`
     FROM `flights` f
-    LEFT JOIN `reservedflights` r
-    ON f.Id = r.FlightId WHERE DATE_FORMAT(DepartureTime, '%d.%m.%Y') >= ";
+    JOIN `reservedflights` r ON (f.Id = r.FlightId)";
     // array_push($arr, $_SESSION['uId']);
 }
 
 
-
-
-if(!isset($_GET['date'])) {
-    $sql = $sql . "DATE_FORMAT(f.DepartureTime, '%d.%m.%Y') AND f.Airline = ";
-} else {
-    $date = $_GET['date'];
-    $sql = $sql . "? AND f.Airline = ";
-    array_push($arr, $date);
-}
-
-if(!isset($_GET['airline'])) {
-    $sql = $sql . "f.Airline AND CONCAT(f.DestinationCountry, \" \", f.Destination) = ";
-} else {
-    $sql = $sql . "? AND CONCAT(f.DestinationCountry, \" \", f.Destination) = ";
-    array_push($arr, $_GET['airline']);
-}
-
-if(!isset($_GET['destination'])) {
-    $sql = $sql . "CONCAT(f.DestinationCountry, \" \", f.Destination);";
-} else {
-    $sql = $sql . "?;";
-    array_push($arr, $_GET['destination']);
-}
 
 // echo $sql;
 
@@ -67,7 +34,7 @@ try {
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
         echo "
-        <div class=\"container mt-5 flight\">
+        <div class=\"container mt-5 flight\" id=\"{$row['Id']}\">
             <div class=\"row flight-card align-items-center\">
                 <div class=\"col-md-8\">
                     <h5>{$row['Departure']} &rarr; {$row['Destination']}</h5>
@@ -104,12 +71,7 @@ try {
 
                     <small>za osobę</small>
 
-                    ";
-                    if(isset($_SESSION['uId']) && isset($_SESSION['uEmail'])) {
-                        if($row['isReserved'] == 'true') echo "<button class=\"btn-white\" id=\"{$row['Id']}\" onclick=\"reserve('{$row['Id']}')\">Odwołaj rezerwację</button>";
-                        else echo "<button class=\"btn-blue\" id=\"{$row['Id']}\" onclick=\"reserve('{$row['Id']}')\">Zarezerwuj</button>";
-                    }
-                    echo "
+                    <button class=\"btn-white\" onclick=\"reserve('{$row['Id']}')\">Odwołaj rezerwację</button>
                 </div>
             </div>
         </div>

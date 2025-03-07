@@ -59,11 +59,15 @@ function reserve(id) {
     let el = document.getElementById(id + "");
 
     if(el.innerHTML !== "Odwołaj rezerwację") {
+        fetch(`scripts/reserveFlight.php?id=${id}`);
+
         el.innerHTML = "Odwołaj rezerwację";
         el.classList.add('btn-white');
         el.classList.remove('btn-blue');
     }
     else {
+        fetch(`scripts/removeReservedFlight.php?id=${id}`);
+
         el.innerHTML = "Zarezerwuj";
         el.classList.add('btn-blue');
         el.classList.remove('btn-white');
